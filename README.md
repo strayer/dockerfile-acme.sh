@@ -63,6 +63,7 @@ docker exec acme-sh acme.sh --install-cert \
   --cert-file /certs/$DOMAIN/cert.pem \
   --key-file /certs/$DOMAIN/key.pem \
   --fullchain-file /certs/$DOMAIN/fullchain.pem \
+  --ca-file /certs/$DOMAIN/ca.pem \
   --reloadcmd "touch /certs/$DOMAIN/reload"
 ```
 
