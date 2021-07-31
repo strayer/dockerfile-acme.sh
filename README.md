@@ -6,7 +6,7 @@ An opiniated way to issue certificates with acme.sh in a Docker container and ha
 
 ## Why?
 
-The official acme.sh container has a lot of stuff in it I don't need and can't run with `--read-only`. I also don't want to mix implementation details of software using certificates to mix into acme.sh - acme.sh should just care about one thing: Issuing certificates.
+The official acme.sh container has a lot of stuff in it I don't need and can't run with `--read-only`. I also don't want to mix implementation details of software using certificates into acme.sh - acme.sh should just care about one thing: Issuing certificates.
 
 ## How?
 
@@ -69,7 +69,7 @@ docker exec acme-sh acme.sh --install-cert \
 
 ### Using the certificate in another container
 
-The easiest way for other containers to access the issue certificates is to simply bind mount the domains cert directory directly.
+The easiest way for other containers to access the issued certificates is to simply bind mount the domains cert directory directly.
 
 ```sh
 cat <<EOT > nginx.conf
