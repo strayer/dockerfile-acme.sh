@@ -50,6 +50,7 @@ Issuing a (staging) certificate is done just as it would be done with the acme.s
 ```sh
 docker exec acme-sh acme.sh --issue \
   --test -d $DOMAIN -d \*.$DOMAIN \
+  --keylength ec-256 \
   --dns dns_cf \
   --challenge-alias $ALIAS_DOMAIN
 ```
@@ -60,6 +61,7 @@ After issuing the certificate it should be installed and a file touched that wil
 mkdir certs/$DOMAIN
 docker exec acme-sh acme.sh --install-cert \
   --test -d $DOMAIN -d \*.$DOMAIN \
+  --ecc \
   --cert-file /certs/$DOMAIN/cert.pem \
   --key-file /certs/$DOMAIN/key.pem \
   --fullchain-file /certs/$DOMAIN/fullchain.pem \
