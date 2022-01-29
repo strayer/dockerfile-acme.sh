@@ -14,6 +14,8 @@ After issuing a certificate, acme.sh installs the certificate files into a certs
 
 ## Usage
 
+The image is pushed and rebuilt daily if Alpine upgrades are available to the Github container registry: [ghcr.io/strayer/acme.sh](https://github.com/strayer/dockerfile-acme.sh/pkgs/container/acme.sh)
+
 The container expects a volume at /data that will contain the acme.sh state and a volume at /certs that will contain issued certificates. The DNS provider and anything else should be configured by environment variables, see the acme.sh documentation for reference. The `cron` command will run `acme.sh --cron` every 24 hours.
 
 The rest of the documentation is based on this test/development setup:
@@ -39,7 +41,7 @@ docker run -d \
   -v $(pwd)/data:/data \
   -v $(pwd)/certs:/certs \
   --tmpfs /tmp \
-  strayer/acme.sh \
+  ghcr.io/strayer/acme.sh:latest \
   cron
 ```
 

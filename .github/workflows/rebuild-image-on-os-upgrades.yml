@@ -1,0 +1,31 @@
+name: Rebuild Docker image on OS upgrades
+on:
+  schedule:
+    - cron: '27 1 * * *'
+  workflow_dispatch:
+jobs:
+  check_os_upgrades:
+    name: Check latest image for OS upgrades
+    runs-on: ubuntu-latest
+    outputs:
+      amount_of_upgrades: ${{ steps.check_os_upgrades.outputs.amount_of_upgrades }}
+    permissions:
+      packages: read
+    container:
+      image: ghcr.io/strayer/acme.sh:latest
+      options: "--entrypoint='' --user=0"
+    steps:
+      - name: Check for apk upgrades
+        id: check_os_upgrades
+        run: |
+          set -euo pipefail
+          apk update >/dev/null
+          AMOUNT_OF_UPGRADES=$(apk list -u | wc -l)
+          echo "Amount of upgrades available: ${AMOUNT_OF_UPGRADES}"
+          echo "::set-output name=amount_of_upgrades::$AMOUNT_OF_UPGRADES"
+        shell: bash
+  call_build_image_workflow:
+    name: "Rebuild"
+    needs: check_os_upgrades
+    if: ${{ needs.check_os_upgrades.outputs.amount_of_upgrades > 0 }}
+    uses: ./.github/workflows/build-image.yml

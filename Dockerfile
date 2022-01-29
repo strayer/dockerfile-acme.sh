@@ -16,6 +16,8 @@ RUN CA_HOME=/data/ca ./acme.sh --install --home /acme.sh --cert-home /data/certs
 
 FROM alpine:3.14
 
+RUN apk upgrade --no-cache
+
 RUN apk add --no-cache curl bash openssl
 
 ENV CERT_HOME /data/certs
