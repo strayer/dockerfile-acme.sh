@@ -1,4 +1,4 @@
-FROM alpine:3.17 AS install
+FROM alpine:3.18 AS install
 
 ARG ACME_SH_GIT_REF=130e8dbd40b71a33dfb8adec7a7a681c2059a7a7
 
@@ -14,7 +14,7 @@ RUN git checkout "$ACME_SH_GIT_REF"
 
 RUN CA_HOME=/data/ca ./acme.sh --install --home /acme.sh --cert-home /data/certs --no-cron --no-profile && rm /acme.sh/account.conf
 
-FROM alpine:3.17
+FROM alpine:3.18
 
 RUN apk upgrade --no-cache
 
