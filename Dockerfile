@@ -1,6 +1,6 @@
 FROM alpine:3.19 AS install
 
-ARG ACME_SH_GIT_REF=130e8dbd40b71a33dfb8adec7a7a681c2059a7a7
+ARG ACME_SH_GIT_REF=afacdfcb95e063325d8f01ebc8daa57322307d92
 
 RUN apk add --no-cache git curl bash openssl
 

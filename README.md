@@ -51,8 +51,9 @@ Issuing a (staging) certificate is done just as it would be done with the acme.s
 
 ```sh
 docker exec acme-sh acme.sh --issue \
+  --server letsencrypt \
   --test -d $DOMAIN -d \*.$DOMAIN \
-  --keylength ec-256 \
+  --keylength ec-384 \
   --dns dns_cf \
   --challenge-alias $ALIAS_DOMAIN
 ```
